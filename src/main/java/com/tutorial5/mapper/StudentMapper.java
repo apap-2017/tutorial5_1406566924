@@ -28,9 +28,18 @@ public interface StudentMapper {
 
 /*	@Select("SELECT npm, name, gpa FROM student WHERE npm = #{npm}")
 	StudentModel selectStudent(@Param("npm") String npm); */
-
-	@Select("SELECT npm, name, gpa FROM student")
+	
+	@Select("SELECT npm, name, gpa FROM student") 
+	@Results(value = {
+	         @Result(property = "npm", column = "npm"),
+	         @Result(property = "name", column = "name"),
+	         @Result(property = "gpa", column = "gpa"),
+	         @Result(property = "courses", column = "npm", javaType = List.class, many = @Many(select = "selectCourses")) 
+	         })
 	List<StudentModel> selectAllStudents();
+	
+/*	@Select("SELECT npm, name, gpa FROM student")
+	List<StudentModel> selectAllStudents(); */
 
 	@Insert("INSERT INTO student (npm, name, gpa) VALUES (#{npm}, #{name}, #{gpa})")
 	void addStudent(StudentModel student);
