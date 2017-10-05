@@ -50,6 +50,6 @@ public interface StudentMapper {
 	@Update("UPDATE student SET npm=#{npm}, name=#{name}, gpa=#{gpa} WHERE npm=#{npm}")
 	void updateStudent(StudentModel student);
 
-	@Select("SELECT course.id_course, name, credits FROM studentcourse join course on studentcourse.id_course=course.id_course where studentcourse.npm=#{npm}")
+	@Select("SELECT course.id_course, name, credits FROM studentcourse join course on studentcourse.id_course=course.id_course WHERE studentcourse.npm=#{npm}")
 	List<CourseModel> selectCourses(@Param("npm") String npm);
 }
